@@ -28,6 +28,12 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<!-- The custom maven-compiler-plugin executions below replace the parent's
+		     configuration, so -parameters has to be asked for explicitly. Spring
+		     6.1 removed LocalVariableTableParameterNameDiscoverer, so without it
+		     parameter names are invisible to Spring: @RequestParam/@PathVariable
+		     with no explicit name, and validation error reporting, both break. -->
+		<maven.compiler.parameters>true</maven.compiler.parameters>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,6 +43,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<dependency>
